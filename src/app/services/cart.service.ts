@@ -59,16 +59,17 @@ ClearCart(): void{
   });
 }
 
-removeFromCart(item: CartItem):void{
+removeFromCart(item: CartItem, update = true):Array <CartItem>{
 const filteredItems = this.cart.value.items.filter(
   (_item) => _item.id !== item.id
 );
-
+if(update){
 this.cart.next ({items: filteredItems})
 this._snackBar.open('1 item is removed from the cart.', 'Ok',{
   duration: 3000
 });
-
+}
+ return filteredItems;
 }
 
 }
