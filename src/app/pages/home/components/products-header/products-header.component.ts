@@ -1,28 +1,29 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-products-header',
   templateUrl: './products-header.component.html',
-  
 })
-export class ProductsHeaderComponent implements OnInit {
+export class ProductsHeaderComponent {
   @Output() columnsCountChange = new EventEmitter<number>();
-  sort ='desc';
-  itemsShowCount = 10;
+  @Output() itemsCountChange = new EventEmitter<number>();
+  @Output() sortChange = new EventEmitter<string>();
+  itemsShowCount = 12;
+  sort = 'desc';
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-  onSortUpdated(newSort: string): void{
-    this.sort = newSort;
+  onColumnsUpdate(colsNum: number): void {
+    this.columnsCountChange.emit(colsNum);
   }
 
-  onItemsUpdated(count : number): void{
+  onItemsUpdate(count: number): void {
+    this.itemsCountChange.emit(count);
     this.itemsShowCount = count;
   }
 
-  onColumnsUpdate(colsNum: number): void {
-    this.columnsCountChange.emit(colsNum);
+  onSortUpdate(newSort: string): void {
+    this.sortChange.emit(newSort);
+    this.sort = newSort;
   }
 }

@@ -52,7 +52,7 @@ getTotal(items: CartItem[]): number {
     .reduce((prev, current) => prev + current, 0);
 }
 
-ClearCart(): void{
+clearCart(): void{
   this.cart.next({items: [] });
   this._snackBar.open('Cart is Emptied.', 'Ok',{
     duration: 3000
